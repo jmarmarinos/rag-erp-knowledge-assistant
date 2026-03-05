@@ -25,3 +25,9 @@ DOMAIN_PAGE_RANGES = [
     ("mps", 43, 62),
     ("wms", 63, 115),
 ]
+
+
+def assert_dirs_exist():
+    CUSTOM_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    OFFICIAL_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    VECTORSTORE_DIR.mkdir(parents=True, exist_ok=True)
