@@ -1,0 +1,26 @@
+# Core RAG / LangChain
+langchain
+langchain-community
+langchain-text-splitters
+langchain-openai
+langchain-ibm
+
+# Vector DB + embeddings
+faiss-cpu
+sentence-transformers
+
+# Document parsing
+pypdf
+unstructured
+python-pptx
+pillow
+
+# API / app
+fastapi
+uvicorn
+flask
+python-dotenv
+
+# Azure (optional modules used in some experiments)
+azure-core
+azure-ai-vision-imageanalysis
