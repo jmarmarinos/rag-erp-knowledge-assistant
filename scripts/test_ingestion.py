@@ -1,7 +1,5 @@
 from app.vectorstores import load_vectorstore
-from app.config import CUSTOM_DOCS_DIR
-from app.config import OFFICIAL_DOCS_DIR
-
+from app.config import CUSTOM_DOCS_DIR, OFFICIAL_DOCS_DIR
 
 
 #load_vectorstore(CUSTOM_DOCS_DIR, "blueprint" )
