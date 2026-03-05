@@ -31,3 +31,5 @@ def assert_dirs_exist():
     CUSTOM_DOCS_DIR.mkdir(parents=True, exist_ok=True)
     OFFICIAL_DOCS_DIR.mkdir(parents=True, exist_ok=True)
     VECTORSTORE_DIR.mkdir(parents=True, exist_ok=True)
+    CUSTOM_INDEX_DIR.mkdir(parents=True, exist_ok=True)
+    OFFICIAL_INDEX_DIR.mkdir(parents=True, exist_ok=True)
