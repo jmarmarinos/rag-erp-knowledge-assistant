@@ -3,7 +3,7 @@ Enterprise RAG assistant that extracts operational knowledge from ERP documentat
 
 AI-powered Retrieval-Augmented Generation (RAG) system designed to extract knowledge from complex ERP documentation and assist users in performing tasks in systems such as Microsoft Dynamics 365 Business Central especially in areas which have been customized and not covered by the official vendor's documentation.
 
-The project focuses on transforming unstructured ERP documentation (PDFs, PowerPoints, manuals) into a searchable knowledge system that can answer operational questions using domain-specific context.
+The project focuses on transforming unstructured ERP documentation (PDFs, PowerPoints, manuals) into a searchable knowledge system that can answer operational questions using domain-specific context. The application supports  Multilingual semantic retrieval (Greek documentation)
 
 Example questions the system aims to answer:
 
