@@ -5,6 +5,23 @@ from huggingface_hub import InferenceClient
 
 model_id = 'meta-llama/llama-3-3-70b-instruct' 
 
+def detect_domain(question):
+    q = question.lower()
+
+    mrp_terms = ['mrp', 'παραγγελία αγοράς', 'sales order', 'lead time']
+    mps_terms = ['mps', 'προγραμματισμός παραγωγής', 'bom', 'routing', 'γραμμή παραγωγής']
+    wms_terms = ['wms','sscc', 'lot', 'αποθήκη', 'ζώνη','picking','bin']
+
+    if any(m in q for m in mrp_terms): 
+        domain = 'mrp'
+    elif any(m in q for m in mps_terms): 
+        domain = 'mps'
+    elif any(m in q for m in wms_terms): 
+        domain = 'wms'
+    else:
+        domain = 'uknown'
+
+    return domain
 
 def retrieve_context(query, domain):
     db = FAISS.load_local(str(CUSTOM_INDEX_DIR), 
@@ -12,14 +29,14 @@ def retrieve_context(query, domain):
                           allow_dangerous_deserialization=True     
     )
     
-    results = db.similarity_search(query, k=3, filter={"domain": domain})
+    results = db.similarity_search(query, k=5, filter={"domain": domain})
     return results
 
 def generate_answer(context, question):
     
     client = InferenceClient(
     model="meta-llama/Meta-Llama-3-8B-Instruct",
-    token="hf_xxxxxxxxxxxxxxx"
+    token="hf_xxxxxxxxxxxxxxxxxxxxxxxxxx"
     )
     for c in context:
         print("\n" + "="*80)
