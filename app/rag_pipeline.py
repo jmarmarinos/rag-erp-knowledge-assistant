@@ -29,14 +29,14 @@ def retrieve_context(query, domain):
                           allow_dangerous_deserialization=True     
     )
     
-    results = db.similarity_search(query, k=5, filter={"domain": domain})
+    results = db.similarity_search(query, k=8, filter={"domain": domain})
     return results
 
 def generate_answer(context, question):
     
     client = InferenceClient(
     model="meta-llama/Meta-Llama-3-8B-Instruct",
-    token="hf_xxxxxxxxxxxxxxxxxxxxxxxxxx"
+    token="hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     )
     for c in context:
         print("\n" + "="*80)
@@ -45,12 +45,26 @@ def generate_answer(context, question):
 
     response = client.chat_completion(
         messages=[
-        {"role": "system", "content": "Απάντησε στα ελληνικά μόνο βάση του συγκεκριμένου content. "
-        "Αν δεν βρεις την απάντηση πες ότι η απάντηση δεν είναι στο εύρος των γνώσεων σου"},
+        {"role": "system", 
+         "content": '''Απάντησε στα ελληνικά μόνο με βάση το context.
+                    Δομή απάντησης:
+                    - Σύντομη απάντηση
+                    - Βήματα (αν υπάρχουν)
+                    - Παράδειγμα μόνο αν υπάρχει
+                    Αν δεν υπάρχει πληροφορία, πες το καθαρά.
+                    Αν η ερώτηση περιγράφει ένα πρόβλημα ή λανθασμένο
+                      αποτέλεσμα και το περιεχόμενο περιλαμβάνει συνθήκες ρύθμισης
+                       ή παραμέτρους, απάντησε παραθέτοντας τις παραμέτρους,
+                         τις προϋποθέσεις ή τους παράγοντες που επηρεάζουν και 
+                         αναφέρονται στα έγγραφα, αντί να επινοείς μια
+                           συγκεκριμένη διάγνωση.
+
+
+                    '''},
         {"role": "user",
          "content": f"Context:\n{context}\n\nΕρώτηση:\n{question}"}
     ],
-    max_tokens=300,
+    max_tokens=500,
     temperature=0.2
     )
     print(response.choices[0].message.content)
