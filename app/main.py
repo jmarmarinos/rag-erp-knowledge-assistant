@@ -11,16 +11,10 @@ from rag_pipeline import (
 
 app = Flask(__name__)
 
-@app.route("/ask")
-def ask_questions(query: str) -> str:
-
-    #This is added to support Flask API in the future
-    #query = request.args.get("query")
-
+def run_rag(query: str) -> str:
     if not query:
         return ("Error: Question is required")
-        #jsonify({"Error: Question is required"}), 400
-
+    
     domain = detect_domain(query)
 
     doc_type = detect_doc_type(query)
@@ -33,16 +27,30 @@ def ask_questions(query: str) -> str:
     answer = generate_answer(results, query)
 
     return(answer)
-    #return jsonify({
-    #    "query": query,
-    #    "answer": answer
-    #})
+
+@app.route("/ask")
+def ask_questions() -> str:
+
+    query = request.args.get("query")
+
+    if not query:
+        jsonify({"Error: Question is required"}), 400
+
+    answer = run_rag(query)
+
+    return jsonify({
+        "query": query,
+        "answer": answer
+    })
 
 def ui():
     iface = gr.Interface(
-        fn = ask_questions,
-        inputs=["text"],
-        outputs = ["text"]
+        fn = run_rag,
+        inputs=gr.Textbox(
+            label="Question",
+            placeholder = "Please ask a question"
+            ),
+        outputs = gr.textbox(label="Answer")
     )
     iface.launch(server_name = "127.0.0.1", server_port = 7860)
 
