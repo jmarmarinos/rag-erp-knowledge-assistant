@@ -4,6 +4,8 @@ langchain-community
 langchain-text-splitters
 langchain-openai
 langchain-ibm
+ibm_watsonx_ai
+huggingface_hub
 
 # Vector DB + embeddings
 faiss-cpu
@@ -20,7 +22,9 @@ fastapi
 uvicorn
 flask
 python-dotenv
+gradio
 
 # Azure (optional modules used in some experiments)
 azure-core
 azure-ai-vision-imageanalysis
+
