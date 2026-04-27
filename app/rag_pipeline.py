@@ -140,7 +140,7 @@ def generate_answer(context, question):
     
     client = InferenceClient(
     model="meta-llama/Meta-Llama-3-8B-Instruct",
-    token="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    token="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     )
     '''for c in context:
         print("\n" + "="*80)
@@ -172,5 +172,6 @@ def generate_answer(context, question):
     temperature=0.2
     )
     print(response.choices[0].message.content)
+    return(response.choices[0].message.content)
     #for c in context:
     #    print("Πηγές:", c.metadata["file_name"], c.metadata["page_1based"])
