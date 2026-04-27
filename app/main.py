@@ -50,7 +50,7 @@ def ui():
             label="Question",
             placeholder = "Please ask a question"
             ),
-        outputs = gr.textbox(label="Answer")
+        outputs = gr.Textbox(label="Answer")
     )
     iface.launch(server_name = "127.0.0.1", server_port = 7860)
 
